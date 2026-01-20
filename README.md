@@ -20,4 +20,4 @@ Ich wollte nicht nur eine einfache KI-Abfrage. Deshalb habe ich ein **hybrides S
 4. Starte die App mit: `uvicorn main:app --reload`
 
 ---
-**Invesalo – Empowering your financial journey with code.**
+**Investalo – Empowering your financial journey with code.**
