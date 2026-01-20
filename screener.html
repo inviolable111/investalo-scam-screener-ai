@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investalo ScamScreener</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f8fb;--card:#ffffff;--accent:#00e0f0;--accent-2:#5ff3ff;--muted:#98cfd6;--text:#052028;}
+html,body{height:100%;margin:0;font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background: var(--bg);}
+.page-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden;}
+.bg-decor{position:absolute;inset:0;background-image: url('https://www.investalo.de/wp-content/uploads/bg13-1.jpg');background-size: cover;background-position: center;filter: blur(8px) brightness(1.08) contrast(0.98);opacity:0.55;transform: scale(1.03);z-index:0;}
+.bg-overlay{position:absolute;inset:0;background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.6));z-index:1;}
+
+.scam-wrapper{
+    width:720px;
+    max-width:100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,255,255,0.96));
+    border-radius:28px;
+    padding:35px;
+    box-shadow:0 10px 40px rgba(6,30,40,0.12), 0 0 80px rgba(0,224,240,0.06) inset;
+    border:1px solid rgba(0,224,240,0.08);
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.scam-top{display:flex;align-items:center;gap:30px;margin-bottom:15px;}
+.avatar-wrap{
+    width:140px; 
+    height:140px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(0,224,240,0.2), rgba(255,255,255,0));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 25px rgba(0,224,240,0.2);
+    border:2px solid rgba(0,224,240,0.15);
+    padding:10px;
+    flex-shrink: 0;
+}
+.avatar-wrap img{width:100%;height:100%;object-fit:contain; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));}
+
+.scam-title h1{margin:0;font-size:28px;color:var(--text);font-weight:800;letter-spacing:-0.5px;}
+.scam-sub{margin-top:6px;font-size:16px;color:var(--muted);}
+
+.chat-box{
+    height:520px;
+    background: linear-gradient(180deg, rgba(245,255,255,0.7), rgba(255,255,255,0.85));
+    border-radius:20px;
+    padding:25px;
+    overflow-y:auto;
+    border:1px solid rgba(0,224,240,0.08);
+    box-shadow:0 6px 30px rgba(7,30,36,0.05);
+}
+
+.msg{display:flex;margin-bottom:20px;animation:fadeIn .3s ease both;}
+.msg .bubble{padding:16px 20px;border-radius:18px;max-width:85%;word-break:break-word;font-size:14.5px;line-height:1.6;}
+.bot .avatar-small{width:42px;height:42px;border-radius:50%;overflow:hidden;box-shadow:0 4px 10px rgba(0,224,240,0.1);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(0,224,240,0.1);}
+.bot .avatar-small img { width: 85%; height: 85%; object-fit: contain; }
+.bot .bubble{background: white; border:1px solid rgba(0,224,240,0.1); color:#05383d; box-shadow: 0 4px 15px rgba(0,0,0,0.02);}
+.user{justify-content:flex-end;}
+.user .bubble{background: linear-gradient(135deg, var(--accent-2), var(--accent)); color:#00363e; font-weight:600; box-shadow: 0 4px 15px rgba(0,224,240,0.2);}
+
+/* EINGABEBEREICH */
+.input-area{display:flex;gap:12px;margin-top:5px;align-items: flex-end;}
+.input-field{
+    flex:1; display:flex; background: #ffffff; border-radius: 16px; padding: 12px 18px;
+    border: none !important; box-shadow: 0 0 0 2px #c2f3f8, 0 4px 15px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s ease-in-out; align-items: center; min-height: 48px; box-sizing: border-box;
+}
+.input-field:focus-within{ box-shadow: 0 0 0 2px #00e0f0, 0 0 0 5px rgba(0, 224, 240, 0.1); }
+.input-field textarea{ border:none; outline:none; font-size:15px; flex:1; background:transparent; color:var(--text); resize:none; min-height: 24px; max-height: 150px; font-family: inherit; line-height: 1.5; padding:2px 0; overflow: hidden; }
+
+.btn-anal{
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    color:#002b2f;padding:14px 28px;border-radius:16px;border:none;cursor:pointer;
+    font-weight:700;box-shadow:0 8px 20px rgba(0,224,240,0.25);
+    transition: all 0.3s ease;
+}
+
+.community-note { font-size: 11px; color: var(--muted); text-align: center; margin-bottom: 5px; font-weight: 500; }
+
+.pulse { animation: pulse-animation 1.5s infinite ease-in-out; }
+@keyframes pulse-animation { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+.action-link{cursor:pointer; font-size:13px; color:var(--muted); transition: color 0.2s; font-weight: 500;}
+@keyframes fadeIn{from{opacity:0; transform: translateY(10px);}to{opacity:1; transform: translateY(0);}}
+@media (max-width:720px){.scam-wrapper{padding:20px;border-radius:0;height:100vh;width:100%;}.avatar-wrap{width:100px; height:100px;}}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <div class="bg-decor"></div>
+  <div class="bg-overlay"></div>
+  <main class="scam-wrapper">
+    <header class="scam-top">
+      <div class="avatar-wrap">
+        <img src="https://www.investalo.de/wp-content/uploads/ohnehintergrund1-1.png" alt="Investalo">
+      </div>
+      <div class="scam-title">
+        <h1>Investalo ScamScreener</h1>
+        <div class="scam-sub">KI-Sicherheitscheck für verdächtige Nachrichten</div>
+      </div>
+    </header>
+
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
+        <span id="clearBtn" class="action-link">🗑️ Verlauf löschen</span>
+    </div>
+
+    <div class="chat-box" id="chatBox">
+      <div class="msg bot">
+        <div class="avatar-small"><img src="https://www.investalo.de/wp-content/uploads/ohnehintergrund1-1.png" alt=""></div>
+        <div class="bubble">Guten Tag! Ich bin der Investalo ScamScreener. Kopieren Sie eine E-Mail oder Nachricht hier hinein, um sie auf Betrug zu prüfen.</div>
+      </div>
+    </div>
+
+    <div class="input-area-wrap">
+        <div class="community-note">✨ Mit jeder Eingabe hilfst du, den ScamScreener zu verbessern.</div>
+        <div class="input-area">
+          <div class="input-field">
+            <textarea id="userInput" placeholder="Nachricht hier einfügen..." rows="1"></textarea>
+          </div>
+          <button id="sendBtn" class="btn-anal">Analysieren</button>
+        </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:5px;">
+      <span id="exportBtn" class="action-link" style="color:var(--accent); font-weight:700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px;">📥 Export Report (.csv)</span>
+    </div>
+  </main>
+</div>
+
+<script>
+const BOT_IMG_URL = 'https://www.investalo.de/wp-content/uploads/ohnehintergrund1-1.png';
+const API_URL = "http://127.0.0.1:8000/analyze"; 
+
+const chatBox=document.getElementById('chatBox');
+const input=document.getElementById('userInput');
+const sendBtn=document.getElementById('sendBtn');
+const exportBtn=document.getElementById('exportBtn');
+const clearBtn=document.getElementById('clearBtn');
+
+input.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+});
+
+function createMessage(text, who='bot'){
+  const container=document.createElement('div');
+  container.className='msg '+(who==='bot'?'bot':'user');
+  if(who==='bot'){
+    const av=document.createElement('div');
+    av.className='avatar-small';
+    const img=document.createElement('img');
+    img.src=BOT_IMG_URL;
+    av.appendChild(img);
+    container.appendChild(av);
+  }
+  const bubble=document.createElement('div');
+  bubble.className='bubble';
+  bubble.innerHTML=text;
+  container.appendChild(bubble);
+  return container;
+}
+
+sendBtn.addEventListener('click',()=>processInput());
+input.addEventListener('keydown',e=>{ 
+    if(e.key==='Enter' && !e.shiftKey) { 
+        e.preventDefault();
+        processInput(); 
+    }
+});
+
+async function processInput(){
+  const txt=input.value.trim();
+  if(!txt) return;
+
+  chatBox.appendChild(createMessage(txt.replace(/\n/g, '<br>'),'user'));
+  chatBox.scrollTop = chatBox.scrollHeight;
+  input.value='';
+  input.style.height = 'auto';
+
+  const thinking = createMessage('<span class="pulse">Analyse läuft...</span>', "bot");
+  chatBox.appendChild(thinking);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try {
+    const response = await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({ content: txt })
+    });
+    const data = await response.json();
+    thinking.remove();
+
+    const score = data.score ?? 0;
+    const color = score > 60 ? '#ff4d4d' : (score > 30 ? '#ffa500' : '#2ecc71');
+    const recs = (data.recommendations || []).map(r => `<li><strong>${r.priority}:</strong> ${r.action}</li>`).join('');
+
+    const output = `
+      <div style="color:${color}; font-size:19px; font-weight:800; margin-bottom:8px;">${score}% Risiko-Score</div>
+      <strong>Fazit:</strong> ${data.summary||"—"}<br>
+      <div style="margin:12px 0; font-size:14px; line-height:1.6; color:#333;">${data.explanation_text||""}</div>
+      <div style="background:rgba(0,0,0,0.04); padding:15px; border-radius:14px; margin:12px 0; font-size:13px; border-left: 5px solid ${color};">
+          <strong style="display:block; margin-bottom:5px;">🛡️ Handlungsempfehlung:</strong>
+          <ul style="margin:0; padding-left:18px;">${recs}</ul>
+      </div>
+      <div style="margin-top:18px; padding:15px; background: rgba(0, 224, 240, 0.1); border-radius: 14px; text-align: center; border: 1px solid rgba(0, 224, 240, 0.3);">
+        <div style="font-size:16px; font-weight:600; color: #005a64; line-height: 1.4;">
+          "${data.user_feedback || "Gut, dass du vorsichtig bist! Bleib weiterhin wachsam!"}"
+        </div>
+      </div>
+    `;
+    chatBox.appendChild(createMessage(output,'bot'));
+    chatBox.scrollTop = chatBox.scrollHeight;
+    saveCase({ text: txt, score: score, risk: data.risk, ts: Date.now() });
+  } catch(err){
+    thinking.remove();
+    chatBox.appendChild(createMessage("Server-Verbindung fehlgeschlagen. Bitte Backend prüfen.",'bot'));
+  }
+}
+
+function saveCase(obj){
+  const key='scam_cases_semantic';
+  const arr=JSON.parse(localStorage.getItem(key)||'[]');
+  arr.push(obj);
+  localStorage.setItem(key,JSON.stringify(arr));
+}
+
+exportBtn.addEventListener('click',()=>{
+  const key='scam_cases_semantic';
+  const arr=JSON.parse(localStorage.getItem(key)||'[]');
+  if(arr.length===0){alert('Keine Daten vorhanden.');return;}
+  let csv='Zeit;Score;Risiko;Text\n';
+  arr.forEach(r=>{
+    csv+=`${new Date(r.ts).toLocaleString()};${r.score};${r.risk};"${r.text.replace(/"/g,'""')}"\n`;
+  });
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Investalo_ScamReport.csv';a.click();
+  URL.revokeObjectURL(url);
+});
+
+clearBtn.addEventListener('click',()=>{
+  if(confirm("Gesamten Verlauf löschen?")){
+    chatBox.innerHTML='';
+    chatBox.appendChild(createMessage("Verlauf wurde geleert.","bot"));
+    localStorage.removeItem('scam_cases_semantic');
+  }
+});
+</script>
+</body>
+</html>
