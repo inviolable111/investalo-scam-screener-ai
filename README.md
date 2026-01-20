@@ -1,6 +1,6 @@
 # <img src="Maskottchen.png" width="150" align="right"> Investalo ScamScreener: Don't get rekt! 🛡️
 
-Hand aufs Herz: Der Finanzmarkt ist voll von Scams. Mit **Invesalo** baue ich Tools, die dem Nutzer den Rücken freihalten. Der **ScamScreener** ist mein erster Bodyguard gegen manipulative Nachrichten und "Schnell-reich-werden"-Müll.
+Hand aufs Herz: Der Finanzmarkt ist voll von Scams. Mit **Investalo** baue ich Tools, die dem Nutzer den Rücken freihalten. Der **ScamScreener** ist mein erster Bodyguard gegen manipulative Nachrichten und "Schnell-reich-werden"-Müll.
 
 ## 🧠 Warum dieser Ansatz?
 Ich wollte nicht nur eine einfache KI-Abfrage. Deshalb habe ich ein **hybrides System** gebaut:
