@@ -1,4 +1,4 @@
-# <img src="Maskottchen.png" width="150" align="right"> Invesalo ScamScreener: Don't get rekt! 🛡️
+# <img src="Maskottchen.png" width="150" align="right"> Investalo ScamScreener: Don't get rekt! 🛡️
 
 Hand aufs Herz: Der Finanzmarkt ist voll von Scams. Mit **Invesalo** baue ich Tools, die dem Nutzer den Rücken freihalten. Der **ScamScreener** ist mein erster Bodyguard gegen manipulative Nachrichten und "Schnell-reich-werden"-Müll.
 
