@@ -1,26 +1,27 @@
 <p align="center">
   <img src="preview.png" alt="Screenshot" width="80%">
 </p>
+
 # <img src="Maskottchen.png" width="150" align="right"> Investalo ScamScreener: Don't get rekt! 🛡️
 
-Hand aufs Herz: Der Finanzmarkt ist voll von Scams. Mit **Investalo** baue ich Tools, die dem Nutzer den Rücken freihalten. Der **ScamScreener** ist mein erster Bodyguard gegen manipulative Nachrichten und "Schnell-reich-werden"-Müll.
+Let's be real: the financial market is crawling with scams. With **Investalo**, I am building tools to watch the user's back. The **ScamScreener** is my first "bodyguard" against manipulative messages and "get-rich-quick" garbage.
 
-## 🧠 Warum dieser Ansatz?
-Ich wollte nicht nur eine einfache KI-Abfrage. Deshalb habe ich ein **hybrides System** gebaut:
-1. **OpenAI (The Brain):** Versteht den Kontext, die Psychologie hinter dem Scam und die fiesen Tricks der Betrüger.
-2. **Local ML (The Guard):** Ein Random Forest Modell, das direkt auf meinem Code läuft. Es lernt aus jedem Fall dazu und erkennt statistische Muster, die man mit bloßem Auge übersieht.
+## 🧠 Why this approach?
+I didn't want just a simple AI query. That’s why I built a **hybrid system**:
+1. **OpenAI (The Brain):** Understands the context, the psychology behind the scam, and the dirty tricks fraudsters use.
+2. **Local ML (The Guard):** A Random Forest model running directly within the code. It learns from every case and identifies statistical patterns that are invisible to the naked eye.
 
-## 🔥 Tech-Highlights
-* **FastAPI Backend:** Schlank, schnell und asynchron – für Performance ohne Wartezeit.
-* **Hybrid Scoring:** 70% KI-Expertise + 30% lokales Machine Learning für maximale Treffsicherheit.
-* **Self-Improving:** Dank des `train_model.py` Skripts lernt der Screener mit jeder neuen Scam-Welle dazu.
-* **Modern UI:** Ein sauberes Interface im Glassmorphism-Style, das Vertrauen schafft und einfach zu bedienen ist.
+## 🔥 Tech Highlights
+* **FastAPI Backend:** Lean, fast, and asynchronous – for performance without the wait.
+* **Hybrid Scoring:** 70% AI expertise + 30% local Machine Learning for maximum accuracy.
+* **Self-Improving:** Thanks to the `train_model.py` script, the screener evolves with every new wave of scams.
+* **Modern UI:** A clean glassmorphism-style interface that builds trust and is easy to use.
 
-## 🔧 Installation & Start
-1. Repository klonen.
+## 🔧 Installation & Setup
+1. Clone the repository.
 2. `pip install -r requirements.txt`
-3. Erstelle eine `.env` Datei und füge deinen `OPENAI_API_KEY` ein.
-4. Starte die App mit: `uvicorn main:app --reload`
+3. Create a `.env` file and add your `OPENAI_API_KEY`.
+4. Launch the app with: `uvicorn main:app --reload`
 
 ---
 **Investalo – Empowering your financial journey with code.**
