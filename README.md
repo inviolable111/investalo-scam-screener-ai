@@ -1,5 +1,7 @@
 🛡️ Investalo ScamScreener AI
 
+![Investalo ScamScreener Preview](screenshot.png)
+
 An intelligent security tool for detecting financial fraud and scams, developed for the Investalo Community. This system combines linguistic AI analysis with local machine learning to provide real-time risk assessments.
 
 ## 🚀 Features
