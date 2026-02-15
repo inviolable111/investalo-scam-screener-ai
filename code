@@ -1,0 +1,4 @@
+server startn: venv\Scripts\activate
+venv: venv\Scripts\activate
+uvicorn main:app --host 127.0.80000.1 --port 
+uvicorn main:app --host 127.0.0.1 --port 8000 --reload

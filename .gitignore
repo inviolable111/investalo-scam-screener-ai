@@ -1,0 +1,13 @@
+# Sensible Daten
+.env
+
+# Daten & Notizen
+training_data.jsonl
+Anleitung.txt
+Anmerkungen zu dieser Version*
+
+# Python & System
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store

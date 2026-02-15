@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  scam-screener:
+    build: .
+    container_name: investalo-screener
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # Wir mounten nur die Dateien, die sich beim Training verändern können.
+      # So bleiben main.py und die Logik geschützt im Image.
+      - ./scam_ml_model.joblib:/app/scam_ml_model.joblib
+      - ./scam_vectorizer.joblib:/app/scam_vectorizer.joblib
+      - ./training_data.jsonl:/app/training_data.jsonl
+    restart: unless-stopped

@@ -1,0 +1,364 @@
+!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investalo ScamScreener</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f4f8fb;
+  --card:#ffffff;
+  --accent:#00e0f0;
+  --accent-2:#5ff3ff;
+  --muted:#98cfd6;
+  --text:#052028;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family:"Inter", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+}
+
+.page-wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.bg-decor{
+  position:absolute;
+  inset:0;
+  background-image:url('https://www.investalo.de/wp-content/uploads/bg13-1.jpg');
+  background-size:cover;
+  background-position:center;
+  filter:blur(8px) brightness(1.08);
+  opacity:0.55;
+  transform:scale(1.03);
+  z-index:0;
+}
+
+.bg-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.55),rgba(255,255,255,0.6));
+  z-index:1;
+}
+
+.scam-wrapper{
+  width:720px;
+  max-width:95%;
+  background:white;
+  border-radius:28px;
+  padding:35px;
+  box-shadow:0 10px 40px rgba(6,30,40,0.12);
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.scam-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.avatar-wrap{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 5px 15px rgba(0,224,240,0.2);
+  padding:5px;
+}
+
+.avatar-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.chat-box{
+  height:480px;
+  background:rgba(245,255,255,0.7);
+  border-radius:20px;
+  padding:25px;
+  overflow-y:auto;
+  border:1px solid rgba(0,224,240,0.08);
+}
+
+.msg{
+  display:flex;
+  margin-bottom:20px;
+  animation:fadeIn .3s ease both;
+}
+
+.msg .bubble{
+  padding:16px 20px;
+  border-radius:18px;
+  max-width:85%;
+  font-size:14.5px;
+  line-height:1.6;
+  position:relative;
+}
+
+.bot .bubble{
+  background:white;
+  border:1px solid rgba(0,224,240,0.1);
+  color:#05383d;
+}
+
+.user{
+  justify-content:flex-end;
+}
+
+.user .bubble{
+  background:linear-gradient(135deg,var(--accent-2),var(--accent));
+  color:#00363e;
+  font-weight:600;
+}
+
+.input-area{
+  display:flex;
+  gap:12px;
+  align-items:flex-end;
+}
+
+.input-field{
+  flex:1;
+  background:#fff;
+  border-radius:16px;
+  padding:12px 18px;
+  box-shadow:0 0 0 2px #c2f3f8;
+}
+
+.input-field textarea{
+  border:none;
+  outline:none;
+  font-size:15px;
+  width:100%;
+  background:transparent;
+  resize:none;
+}
+
+.btn-anal{
+  background:linear-gradient(180deg,var(--accent-2),var(--accent));
+  color:#002b2f;
+  padding:14px 28px;
+  border-radius:16px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.action-link{
+  cursor:pointer;
+  font-size:13px;
+  color:var(--muted);
+  font-weight:500;
+  text-decoration:none;
+}
+
+.action-link:hover{
+  color: var(--text);
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:none;}
+}
+
+/* ===============================
+   CYAN BLINK EFFEKT (NEU)
+   =============================== */
+@keyframes cyanBlink{
+  0%   { box-shadow:0 0 0 2px #c2f3f8; }
+  50%  { box-shadow:0 0 0 2px #00e0f0, 0 0 22px rgba(0,224,240,0.9); }
+  100% { box-shadow:0 0 0 2px #c2f3f8; }
+}
+
+.input-field.blink{
+  animation: cyanBlink 0.35s ease-out;
+}
+</style>
+</head>
+
+<body>
+<div class="page-wrap">
+  <div class="bg-decor"></div>
+  <div class="bg-overlay"></div>
+
+  <main class="scam-wrapper">
+    <header class="scam-top">
+      <div class="logo-area">
+        <div class="avatar-wrap">
+          <img src="https://www.investalo.de/wp-content/uploads/ohnehintergrund1-1.png">
+        </div>
+        <div>
+          <h1 style="margin:0;font-size:22px;">Investalo ScamScreener</h1>
+          <div style="font-size:12px;color:var(--muted);">KI-Sicherheitscheck</div>
+        </div>
+      </div>
+      <span id="clearChat" class="action-link">🗑️ Verlauf löschen</span>
+    </header>
+
+    <div class="chat-box" id="chatBox">
+      <div class="msg bot">
+        <div class="bubble">Guten Tag! Kopieren Sie eine Nachricht hier hinein.</div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-field">
+        <textarea id="userInput" rows="2" placeholder="Nachricht hier einfügen..."></textarea>
+      </div>
+      <button id="sendBtn" class="btn-anal">Analysieren</button>
+    </div>
+
+    <div style="text-align:center;">
+      <span id="exportCsv" class="action-link" style="text-decoration: underline;">📩 EXPORT REPORT (.CSV)</span>
+    </div>
+  </main>
+</div>
+
+<script>
+const API_URL="http://127.0.0.1:8000/analyze";
+const FEEDBACK_URL="http://127.0.0.1:8000/feedback-eval";
+const API_KEY="investalo-public-frontend";
+
+const chatBox=document.getElementById("chatBox");
+const input=document.getElementById("userInput");
+const sendBtn=document.getElementById("sendBtn");
+const inputField=document.querySelector(".input-field");
+
+let historyData = [];
+
+/* ========= CYAN BLINK LOGIK ========= */
+function blinkInput(){
+  inputField.classList.remove("blink");
+  void inputField.offsetWidth;
+  inputField.classList.add("blink");
+}
+
+input.addEventListener("paste", blinkInput);
+input.addEventListener("input", blinkInput);
+sendBtn.addEventListener("click", blinkInput);
+/* =================================== */
+
+function createMessage(text, who="bot"){
+  const c=document.createElement("div");
+  c.className="msg "+(who==="bot"?"bot":"user");
+  const b=document.createElement("div");
+  b.className="bubble";
+  b.innerHTML=text;
+  c.appendChild(b);
+  return c;
+}
+
+sendBtn.onclick=async()=>{
+  const txt=input.value.trim();
+  if(!txt) return;
+
+  chatBox.appendChild(createMessage(txt,"user"));
+  chatBox.scrollTop=chatBox.scrollHeight;
+  input.value="";
+
+  const thinking=createMessage("Analysiere Nachricht...");
+  chatBox.appendChild(thinking);
+
+  try{
+    const res=await fetch(API_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "X-App-Key":API_KEY
+      },
+      body:JSON.stringify({content:txt})
+    });
+
+    const data=await res.json();
+    thinking.remove();
+
+    historyData.push({
+      date:new Date().toLocaleString(),
+      score:data.score,
+      risk:data.risk,
+      summary:data.summary
+    });
+
+    const scoreColor=data.score>60?"#ff4d4d":data.score>30?"#ffa500":"#2ecc71";
+    const recs=(data.recommendations||[])
+      .map(r=>`<li><strong>${r.priority}:</strong> ${r.action}</li>`)
+      .join("");
+
+    const output=`
+      <div style="color:${scoreColor};font-size:19px;font-weight:800;">
+        ${data.score}% Risiko-Score
+      </div>
+      <strong>Fazit:</strong> ${data.summary}
+      <div style="margin:12px 0;font-size:13px;opacity:0.8;">
+        ${data.explanation_text||""}
+      </div>
+      <div style="background:rgba(0,0,0,0.03);padding:15px;border-radius:14px;border-left:5px solid ${scoreColor};">
+        <strong>🛡️ Handlungsempfehlung:</strong>
+        <ul style="margin:8px 0;padding-left:20px;">${recs}</ul>
+      </div>
+      <div style="font-size:10px;margin-top:10px;color:var(--muted);">
+        Dezenter ML-Hinweis: Modell-Risk-Anteil ${(data.ml_risk_score*100).toFixed(1)}%
+      </div>
+    `;
+
+    chatBox.appendChild(createMessage(output,"bot"));
+    chatBox.scrollTop=chatBox.scrollHeight;
+
+  }catch(e){
+    thinking.innerHTML='<div class="bubble" style="color:red;">API-Fehler.</div>';
+  }
+};
+
+document.getElementById("clearChat").onclick=()=>{
+  if(confirm("Möchtest du den Verlauf wirklich löschen?")){
+    chatBox.innerHTML='<div class="msg bot"><div class="bubble">Verlauf gelöscht. Bereit für neue Analyse.</div></div>';
+    historyData=[];
+  }
+};
+
+document.getElementById("exportCsv").onclick=()=>{
+  if(!historyData.length){
+    alert("Noch keine Daten vorhanden.");
+    return;
+  }
+  let csv="Datum;Score;Risiko;Fazit\n";
+  historyData.forEach(h=>{
+    csv+=`${h.date};${h.score}%;${h.risk};"${h.summary.replace(/"/g,'""')}"\n`;
+  });
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="Investalo_ScamReport.csv";
+  a.click();
+};
+</script>
+</body>
+</html>
